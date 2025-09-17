@@ -1,8 +1,25 @@
 # Laravel Docker Starting Kit
 
-A reusable Docker setup for Laravel projects with PHP 8.4, Nginx, and all essential PHP extensions pre-configured.
+A reusable Docker setup for Laravel projects with **PHP 8.4**, **Nginx**, and all essential PHP extensions pre-configured.
 
-## �� Features
+
+> ⚠️ **Note:**  
+> This container only includes the dependencies required to run Laravel or any PHP application.  
+> You can modify the Dockerfile to fit your needs.  
+> The goal is to keep it lightweight for quickly running Laravel/PHP applications, especially APIs without a frontend, and to make deployment on **AWS EC2**, **AWS Fargate**, using **AWS ECS**.
+
+---
+
+## 📌 Roadmap (TODO)
+
+- Separate Dockerfiles for production deployment:
+  - One for serving APIs
+  - One for running the scheduler
+  - One for running Horizon
+
+---
+
+## ✨ Features
 
 - **PHP 8.4** with FPM
 - **Nginx** web server
@@ -13,9 +30,11 @@ A reusable Docker setup for Laravel projects with PHP 8.4, Nginx, and all essent
   - BCMath, PCNTL, OPCache
   - cURL, GMP
   - SOAP
-  - Redis and MongoDB extensions
+  - Redis and MongoDB
   - Intl, MBString
-  - And more Laravel-required extensions
+  - And more required extensions
+
+---
 
 ## 📋 Prerequisites
 
@@ -23,7 +42,9 @@ A reusable Docker setup for Laravel projects with PHP 8.4, Nginx, and all essent
 - Docker Compose
 - Git
 
-## ��️ Quick Start
+---
+
+## 🚀 Quick Start
 
 ### 1. Clone and Setup
 
@@ -66,7 +87,7 @@ composer create-project laravel/laravel .
 composer install
 ```
 
-### 5. Configure Laravel
+### 5. Fix Laravel Permissions (if needed)
 
 ```bash
 # Set proper permissions
@@ -77,16 +98,41 @@ chmod -R 755 /var/www/bootstrap/cache
 
 ### 6. Changing php version 
 
-Update 'FROM php:8.4-fpm-alpine' Dockerfile in .docker directory 
+If you want to use PHP 8.3 instead of 8.4, update the `.docker/Dockerfile`:
+```dockerfile
+# From this
+FROM php:8.4-fpm-alpine
 
-### 7. Running other php application
+# To this
+FROM php:8.3-fpm-alpine
+```
 
-Copy your code to `src` folder in root directory
+### 7. Run Other PHP Applications
 
-if your `index.php` is in public folder, `src/public/index.php`
+- Copy your code into the `src` folder at the project root.
+- Update the Nginx config in `.docker/nginx/nginx.conf` depending on where your `index.php` is located:
 
-Update path to `index.php` file `root /var/www/public;` in `.docker/nginx/nginx.conf`
+```nginx
+# If your index.php is inside a public folder
+root /var/www/public;
 
-if your `index.php` is in `src` folder, `src/index.php`
+# If your index.php is directly inside src/
+root /var/www;
+```
 
-Update path to `index.php` file `root /var/www;` in `.docker/nginx/nginx.conf`
+---
+
+### 8. Run Artisan or Other Commands from App Root
+
+To run `php artisan` commands or any other commands from the app root:
+```bash
+# Access the container shell
+docker compose exec app bash
+```
+
+```bash
+# Run artisan or other commands inside the container
+php artisan migrate
+php artisan config:cache
+composer update
+```
