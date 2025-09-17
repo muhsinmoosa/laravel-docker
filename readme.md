@@ -74,3 +74,19 @@ chown -R www-data:www-data /var/www
 chmod -R 755 /var/www/storage
 chmod -R 755 /var/www/bootstrap/cache
 ```
+
+### 6. Changing php version 
+
+Update 'FROM php:8.4-fpm-alpine' Dockerfile in .docker directory 
+
+### 7. Running other php application
+
+Copy your code to `src` folder in root directory
+
+if your `index.php` is in public folder, `src/public/index.php`
+
+Update path to `index.php` file `root /var/www/public;` in `.docker/nginx/nginx.conf`
+
+if your `index.php` is in `src` folder, `src/index.php`
+
+Update path to `index.php` file `root /var/www;` in `.docker/nginx/nginx.conf`
