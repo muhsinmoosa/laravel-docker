@@ -40,8 +40,6 @@ RUN apk add --no-cache autoconf build-base openssl-dev && \
     docker-php-ext-enable redis mongodb && \
     apk del autoconf build-base
 
-# Install additional required PHP extensions for Laravel
-RUN docker-php-ext-install ctype dom fileinfo filter hash openssl pcre session tokenizer xml
 
 RUN rm -rf /tmp/* /var/cache/apk/*
 

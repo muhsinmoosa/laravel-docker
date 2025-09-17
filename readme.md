@@ -37,18 +37,17 @@ cp .env.example .env
 
 ### 2. Configure Environment
 
-Create a `.env` file in the root directory with the following variables:
+Set port for container:
 
-```env
-CONTAINER_NAME=laravel-app
-CONTAINER_PORT=8000
+```
+APP_PORT=8000
 ```
 
 ### 3. Start the Container
 
 ```bash
 # Build and start the container
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 ### 4. Install Laravel
@@ -57,7 +56,7 @@ Once the container is running, install Laravel using Composer:
 
 ```bash
 # Access the container
-docker-compose exec app bash
+docker compose exec app bash
 
 # Install Laravel (choose one method)
 # Method 1: Create new Laravel project
