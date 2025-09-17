@@ -1,4 +1,4 @@
-# Laravel Docker Starting Kit
+# Laravel Docker Starter Kit
 
 A reusable Docker setup for Laravel projects with **PHP 8.4**, **Nginx**, and all essential PHP extensions pre-configured.
 
