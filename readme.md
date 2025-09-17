@@ -6,7 +6,7 @@ A reusable Docker setup for Laravel projects with **PHP 8.4**, **Nginx**, and al
 > ⚠️ **Note:**  
 > This container only includes the dependencies required to run Laravel or any PHP application.  
 > You can modify the Dockerfile to fit your needs.  
-> The goal is to keep it lightweight for quickly running Laravel/PHP applications, especially APIs without a frontend, and to make deployment on **AWS EC2**, **AWS Fargate**, using **AWS ECS**.
+> The goal is to keep it lightweight for quickly running Laravel/PHP applications, especially APIs without a frontend, and to make deployment on **AWS EC2** or **AWS Fargate**, using **AWS ECS**.
 
 ---
 
