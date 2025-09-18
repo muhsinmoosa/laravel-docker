@@ -5,7 +5,7 @@ services:
       dockerfile: .docker/Dockerfile
     restart: unless-stopped
     ports:
-      - "${APP_PORT:-8000}:80"
+      - "8000:80"
     working_dir: /var/www
     volumes:
       - ./src:/var/www

@@ -51,17 +51,15 @@ A reusable Docker setup for Laravel projects with **PHP 8.4**, **Nginx**, and al
 ```bash
 # Clone this repository or copy the files to your project
 git clone <your-repo-url>
-
-# Create environment file
-cp .env.example .env
 ```
 
 ### 2. Configure Environment
 
-Set port for container:
+Set port for container docker-compose.yml:
 
-```
-APP_PORT=8000
+```yaml
+ports:
+      - "8000:80"
 ```
 
 ### 3. Start the Container
@@ -96,7 +94,7 @@ chmod -R 755 /var/www/storage
 chmod -R 755 /var/www/bootstrap/cache
 ```
 
-### 6. Changing php version 
+## Changing php version 
 
 If you want to use PHP 8.3 instead of 8.4, update the `.docker/Dockerfile`:
 ```dockerfile
@@ -107,7 +105,7 @@ FROM php:8.4-fpm-alpine
 FROM php:8.3-fpm-alpine
 ```
 
-### 7. Run Other PHP Applications
+## Run Other PHP Applications
 
 - Copy your code into the `src` folder at the project root.
 - Update the Nginx config in `.docker/nginx/nginx.conf` depending on where your `index.php` is located:
@@ -122,7 +120,7 @@ root /var/www;
 
 ---
 
-### 8. Run Artisan or Other Commands from App Root
+## Run Artisan or Other Commands from App Root
 
 To run `php artisan` commands or any other commands from the app root:
 ```bash
